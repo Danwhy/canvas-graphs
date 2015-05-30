@@ -14,12 +14,13 @@ var stats = {
 };
 
 var options = {
-    barWidth: 40,
     barColor: 'red',
+    barSpacing: 0.5,
+    barWidth: 60,
     graphWidth: 'auto'
 };
 
-canvas.width = options.graphWidth === 'auto' ? (Object.keys(stats).length) * options.barWidth : options.graphWidth;
+canvas.width = options.graphWidth === 'auto' ? (Object.keys(stats).length + 1) * options.barWidth * 2 : options.graphWidth;
 
 var drawGraph = function(){
     ctx.beginPath();
@@ -44,12 +45,12 @@ var fillGraph = function(){
         ctx.translate(250,250);
         ctx.rotate(90 * Math.PI / 180);
         ctx.font = "20px sans-serif";
-        ctx.fillText(word, 60, 223 - i);
+        ctx.fillText(word, 60, 250 - i - 15 - (options.barWidth * options.barSpacing * 1.75));
         ctx.restore();
         ctx.fillStyle = options.barColor;
-        ctx.fillRect(25 + i, 300, 15, -(15 * stats[word]));
+        ctx.fillRect(15 + (options.barWidth * options.barSpacing) + i, 300, options.barWidth, -(15 * stats[word]));
         ctx.fillStyle = 'black';
-        i += 30;
+        i += options.barWidth * (1 + options.barSpacing);
     }
 };
 
