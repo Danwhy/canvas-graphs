@@ -5,13 +5,13 @@ var canvas = document.getElementById('canvas'),
     highest = 0;
 
 var stats = {
-    hello: 2,
-    how : 10,
-    are: 5,
-    you : 7,
-    doing: 15,
-    today: 11,
-    goodbye: 3
+    one: 2,
+    two : 10,
+    three: 5,
+    four : 7,
+    five: 15,
+    six: 11,
+    seven: 3,
 };
 
 for (var datum in stats){
@@ -24,7 +24,7 @@ for (var datum in stats){
 var options = {
     barColor: 'red',
     barSpacing: 0.5,
-    barWidth: 60,
+    barWidth: 30,
     graphHeight: 300,
     graphWidth: 'auto',
 };
@@ -37,7 +37,7 @@ var drawGraph = function(){
     ctx.moveTo(15, canvas.height / 2);
     ctx.lineTo(15, 0);
     ctx.stroke();
-    ctx.font = "12 px sans-serif";
+    ctx.font = "12px sans-serif";
     ctx.fillText('0', 5, canvas.height / 2);
     ctx.fillText(highest / 2, 0, canvas.height / 4);
     ctx.fillText(highest, 0, 10);
@@ -49,13 +49,13 @@ var drawGraph = function(){
 
 var fillGraph = function(){
     var i = 0;
-    ctx.clearRect(0, canvas.height / 2 + 10, 300, 300);
+    ctx.clearRect(0, canvas.height / 2 + 10, canvas.width, canvas.height);
     for (var word in stats){
         ctx.save();
         ctx.translate(canvas.width / 2,canvas.height / 2);
-        ctx.rotate(90 * Math.PI / 180);
+        ctx.rotate(270 * Math.PI / 180);
         ctx.font = "20px sans-serif";
-        ctx.fillText(word, 10, (canvas.width / 2) - i - 15 - (options.barWidth * options.barSpacing * 1.75));
+        ctx.fillText(word, -ctx.measureText(word).width - 10, -(canvas.width / 2) + i + 20 + options.barWidth);
         ctx.restore();
         ctx.fillStyle = options.barColor;
         ctx.fillRect(15 + (options.barWidth * options.barSpacing) + i, canvas.height / 2, options.barWidth, -((options.graphHeight / highest) * stats[word]));
