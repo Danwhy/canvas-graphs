@@ -18,6 +18,7 @@ for (var datum in stats){
     if (stats[datum] > highest){
         highest = stats[datum];
     }
+    highest = highest % 2 === 0 ? highest : highest + 1;
 }
 
 var options = {
